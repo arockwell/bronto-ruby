@@ -3,7 +3,7 @@ require 'test_helper'
 class ContactTest < Test::Unit::TestCase
   context "" do
     setup do
-      @contact = Bronto::Contact.new(email: "#{Time.now.to_i}-#{rand(1000)}@example.com", status: "active")
+      @contact = Bronto::Contact.new(:email => "#{Time.now.to_i}-#{rand(1000)}@example.com", :status => "active")
     end
 
     teardown do
@@ -35,7 +35,7 @@ class ContactTest < Test::Unit::TestCase
       assert_equal 1, contacts.count
       assert_equal @contact.id, contacts.first.id
 
-      c2 = Bronto::Contact.new(email: "#{Time.now.to_i}-#{rand(1000)}@example.com")
+      c2 = Bronto::Contact.new(:email => "#{Time.now.to_i}-#{rand(1000)}@example.com")
       c2.save
 
       assert_not_nil c2.id
@@ -66,7 +66,7 @@ class ContactTest < Test::Unit::TestCase
     end
 
     should "include fields in results" do
-      f = Bronto::Field.new(name: "test_field", label: "Test Field", type: "text", visibility: "private")
+      f = Bronto::Field.new(:name => "test_field", :label => "Test Field", :type => "text", :visibility => "private")
       f.save
 
       @contact.set_field(f, "test value")

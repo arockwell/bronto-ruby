@@ -54,10 +54,10 @@ module Bronto
       return @soap_header if !refresh and @soap_header.present?
 
       resp = api.request(:v4, :login) do
-        soap.body = { api_token: api_key }
+        soap.body = { :api_token => api_key }
       end
 
-      @soap_header = { "v4:sessionHeader" => { session_id: resp.body[:login_response][:return] } }
+      @soap_header = { "v4:sessionHeader" => { :session_id => resp.body[:login_response][:return] } }
     end
 
     # Saves a collection of Bronto::Base objects.
@@ -81,7 +81,7 @@ module Bronto
       api_key = api_key || self.api_key
 
       resp = request(:read, api_key) do
-        soap.body = { filter: filter.to_hash, page_number: page_number }
+        soap.body = { :filter => filter.to_hash, :page_number => page_number }
       end
 
       Array.wrap(resp[:return]).map { |hash| new(hash) }
@@ -145,7 +145,7 @@ module Bronto
 
       resp = request(:delete, api_key) do
         soap.body = {
-          plural_class_name => objs.map { |o| { id: o.id }}
+          plural_class_name => objs.map { |o| { :id => o.id }}
         }
       end
 
@@ -184,7 +184,7 @@ module Bronto
       _self = self
 
       resp = request(:read) do
-        soap.body = { filter: { id: _self.id } }
+        soap.body = { :filter => { :id => _self.id } }
       end
 
       resp[:return].each do |k, v|

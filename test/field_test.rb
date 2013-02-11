@@ -3,7 +3,7 @@ require 'test_helper'
 class FieldTest < Test::Unit::TestCase
   context "" do
     setup do
-      @field = Bronto::Field.new(name: "test_field", label: "Test Field", type: "text", visibility: "private")
+      @field = Bronto::Field.new(:name => "test_field", :label => "Test Field", :type => "text", :visibility => "private")
     end
 
     teardown do
@@ -22,7 +22,7 @@ class FieldTest < Test::Unit::TestCase
     should "get error on duplicate field" do
       @field.save
 
-      f2 = Bronto::Field.new(name: "test_field", label: "Test Field 2", type: "text", visibility: "private")
+      f2 = Bronto::Field.new(:name => "test_field", :label => "Test Field 2", :type => "text", :visibility => "private")
       f2.save
 
       assert_equal nil, f2.id
@@ -46,7 +46,7 @@ class FieldTest < Test::Unit::TestCase
       assert_equal 1, fields.count
       assert_equal @field.id, fields.first.id
 
-      f2 = Bronto::Field.new(name: "test_field_2", label: "Test Field 2", type: "text", visibility: "private")
+      f2 = Bronto::Field.new(:name => "test_field_2", :label => "Test Field 2", :type => "text", :visibility => "private")
       f2.save
 
       assert_not_nil f2.id

@@ -9,8 +9,8 @@ module Bronto
     # * `fields` can be an array of field IDs or an array of Field objects.
     # * `include_lists` determines whether to include the list IDs each contact belongs to.
     def self.find(filter = Bronto::Filter.new, page_number = 1, include_recipients = false, include_content = false, api_key = nil)
-      body = { filter: filter.to_hash, page_number: page_number, include_recipients: include_recipients,
-          include_content: include_content }
+      body = { :filter => filter.to_hash, :page_number => page_number, :include_recipients => include_recipients,
+          :include_content => include_content }
       api_key = api_key || self.api_key
 
       resp = request(:read, api_key) do
@@ -27,9 +27,9 @@ module Bronto
 
     def to_hash
       hash = {
-        id: id, start: start, message_id: message_id, type: type, from_email: from_email, from_name: from_name,
-        reply_email: reply_email, recipients: recipients, fields: fields, authentication: authentication,
-        reply_tracking: reply_tracking
+        :id => id, :start => :start, :message_id => message_id, :type => type, :from_email => from_email, :from_name => from_name,
+        :reply_email => reply_email, :recipients => recipients, :fields => fields, :authentication => authentication,
+        :reply_tracking => reply_tracking
       }
       hash.each { |k,v| hash.delete(k) if v.blank? }
       hash
@@ -44,7 +44,7 @@ module Bronto
         [args.first.class.to_s.split("::").last.downcase, args.first.id]
       end
 
-      self.recipients << { type: type, id: id }
+      self.recipients << { :type => type, :id => id }
     end
   end
 end

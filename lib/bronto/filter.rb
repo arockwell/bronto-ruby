@@ -10,7 +10,7 @@ module Bronto
     end
 
     def to_hash
-      hash = { type: type || "AND" }
+      hash = { :type => type || "AND" }
       hash.merge(fields)
     end
 
@@ -27,7 +27,7 @@ module Bronto
       if args.length == 1
         self.fields[field] << args.first
       else
-        self.fields[field] << { operator: args.first, value: args.last }
+        self.fields[field] << { :operator => args.first, :value => args.last }
       end
 
       self

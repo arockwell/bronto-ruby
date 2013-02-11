@@ -9,7 +9,7 @@ module Bronto
 
       resp = request(:clear, api_key) do
         soap.body = {
-          list: lists.map { |l| { id: l.id } }
+          :list => lists.map { |l| { :id => l.id } }
         }
       end
 
@@ -41,8 +41,8 @@ module Bronto
 
       resp = request("add_to_list") do
         soap.body = {
-          list: { id: _self.id },
-          contacts: contacts.map { |c| { id: c.id } }
+          :list => { :id => _self.id },
+          :contacts => contacts.map { |c| { :id => c.id } }
         }
       end
 
@@ -61,8 +61,8 @@ module Bronto
 
       resp = request("remove_from_list") do
         soap.body = {
-          list: self.to_hash,
-          contacts: contacts.map(&:to_hash)
+          :list => self.to_hash,
+          :contacts => contacts.map(&:to_hash)
         }
       end
 
@@ -74,7 +74,7 @@ module Bronto
     end
 
     def to_hash
-      hash = { name: name, label: label, status: status, visibility: visibility }
+      hash = { :name => name, :label => label, :status => status, :visibility => visibility }
       hash[:id] = id if id.present?
       hash
     end

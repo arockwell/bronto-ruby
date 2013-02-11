@@ -3,7 +3,7 @@ require 'test_helper'
 class MessageTest < Test::Unit::TestCase
   context "" do
     setup do
-      @message = Bronto::Message.new(name: "Test Message")
+      @message = Bronto::Message.new(:name => "Test Message")
       @message.add_content("html", "HTML Subject", "HTML Content")
       @message.add_content("text", "Text Subject", "Text Content")
     end
@@ -24,7 +24,7 @@ class MessageTest < Test::Unit::TestCase
     should "get error on duplicate message" do
       @message.save
 
-      m2 = Bronto::Message.new(name: "Test Message")
+      m2 = Bronto::Message.new(:name => "Test Message")
       m2.save
 
       assert_equal nil, m2.id
@@ -48,7 +48,7 @@ class MessageTest < Test::Unit::TestCase
       assert_equal 1, messages.count
       assert_equal @message.id, messages.first.id
 
-      m2 = Bronto::Message.new(name: "Test Message 2")
+      m2 = Bronto::Message.new(:name => "Test Message 2")
       m2.save
 
       assert_not_nil m2.id
@@ -61,7 +61,7 @@ class MessageTest < Test::Unit::TestCase
     should "find a specific message" do
       @message.save
 
-      m2 = Bronto::Message.new(name: "Test Message 2")
+      m2 = Bronto::Message.new(:name => "Test Message 2")
       m2.save
 
       filter = Bronto::Filter.new

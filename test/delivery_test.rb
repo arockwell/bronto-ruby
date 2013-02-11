@@ -3,17 +3,17 @@ require 'test_helper'
 class DeliveryTest < Test::Unit::TestCase
   context "" do
     setup do
-      @message = Bronto::Message.new(name: "Test Message")
+      @message = Bronto::Message.new(:name => "Test Message")
       @message.add_content("html", "HTML Subject", "HTML Content")
       @message.add_content("text", "Text Subject", "Text Content")
       @message.save
 
-      @contact = Bronto::Contact.new(email: "#{Time.now.to_i}-#{rand(1000)}@example.com", status: "active")
+      @contact = Bronto::Contact.new(:email => "#{Time.now.to_i}-#{rand(1000)}@example.com", :status => "active")
       @contact.save
 
-      @delivery = Bronto::Delivery.new(start: Time.now, type: "normal", from_name: "Hello", from_email: "test@example.com")
-      @delivery_2 = Bronto::Delivery.new(start: Time.now + (60 * 60 * 24 * 5), type: "normal", from_name: "Hello",
-          from_email: "test2@example.com")
+      @delivery = Bronto::Delivery.new(:start => Time.now, :type => "normal", :from_name => "Hello", :from_email => "test@example.com")
+      @delivery_2 = Bronto::Delivery.new(:start => Time.now + (60 * 60 * 24 * 5), :type => "normal", :from_name => "Hello",
+          :from_email => "test2@example.com")
     end
 
     teardown do

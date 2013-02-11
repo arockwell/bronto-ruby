@@ -3,7 +3,7 @@ require 'test_helper'
 class ListTest < Test::Unit::TestCase
   context "" do
     setup do
-      @list = Bronto::List.new(name: "test_list", label: "Test List", visibility: "private")
+      @list = Bronto::List.new(:name => "test_list", :label => "Test List", :visibility => "private")
     end
 
     teardown do
@@ -22,7 +22,7 @@ class ListTest < Test::Unit::TestCase
     should "get error on duplicate list" do
       @list.save
 
-      l2 = Bronto::List.new(name: "test_list", label: "Test List 2", visibility: "private")
+      l2 = Bronto::List.new(:name => "test_list", :label => "Test List 2", :visibility => "private")
       l2.save
 
       assert_equal nil, l2.id
@@ -46,7 +46,7 @@ class ListTest < Test::Unit::TestCase
       assert_equal 1, lists.count
       assert_equal @list.id, lists.first.id
 
-      l2 = Bronto::List.new(name: "test_list_2", label: "Test List 2", visibility: "private")
+      l2 = Bronto::List.new(:name => "test_list_2", :label => "Test List 2", :visibility => "private")
       l2.save
 
       assert_not_nil l2.id
@@ -81,7 +81,7 @@ class ListTest < Test::Unit::TestCase
 
       assert_equal 0, @list.errors.count
 
-      contact = Bronto::Contact.new(email: "#{Time.now.to_i}-#{rand(1000)}@example.com", status: "active")
+      contact = Bronto::Contact.new(:email => "#{Time.now.to_i}-#{rand(1000)}@example.com", :status => "active")
       contact.save
       assert_equal 0, contact.errors.count
 
@@ -96,11 +96,11 @@ class ListTest < Test::Unit::TestCase
       @list.save
       assert_equal 0, @list.errors.count
 
-      contact = Bronto::Contact.new(email: "#{Time.now.to_i}-#{rand(1000)}@example.com", status: "active")
+      contact = Bronto::Contact.new(:email => "#{Time.now.to_i}-#{rand(1000)}@example.com", :status => "active")
       contact.save
       assert_equal 0, contact.errors.count
 
-      contact2 = Bronto::Contact.new(email: "#{Time.now.to_i}-#{rand(1000)}@example.com", status: "active")
+      contact2 = Bronto::Contact.new(:email => "#{Time.now.to_i}-#{rand(1000)}@example.com", :status => "active")
       contact2.save
       assert_equal 0, contact2.errors.count
 
@@ -116,11 +116,11 @@ class ListTest < Test::Unit::TestCase
     should "clear list" do
       @list.save
 
-      contact = Bronto::Contact.new(email: "#{Time.now.to_i}-#{rand(1000)}@example.com", status: "active")
+      contact = Bronto::Contact.new(:email => "#{Time.now.to_i}-#{rand(1000)}@example.com", :status => "active")
       contact.save
       assert_equal 0, contact.errors.count
 
-      contact2 = Bronto::Contact.new(email: "#{Time.now.to_i}-#{rand(1000)}@example.com", status: "active")
+      contact2 = Bronto::Contact.new(:email => "#{Time.now.to_i}-#{rand(1000)}@example.com", :status => "active")
       contact2.save
       assert_equal 0, contact2.errors.count
 

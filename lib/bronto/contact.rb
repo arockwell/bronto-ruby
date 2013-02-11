@@ -7,7 +7,7 @@ module Bronto
     # * `fields` can be an array of field IDs or an array of Field objects.
     # * `include_lists` determines whether to include the list IDs each contact belongs to.
     def self.find(filter = Bronto::Filter.new, page_number = 1, fields = nil, include_lists = false, api_key = nil)
-      body = { filter: filter.to_hash, page_number: page_number }
+      body = { :filter => filter.to_hash, :page_number => page_number }
       api_key = api_key || self.api_key
 
       body[:fields] = Array.wrap(fields).map { |f| f.is_a?(Bronto::Field) ? f.id : f } if Array(fields).length > 0
@@ -72,9 +72,9 @@ module Bronto
 
     def to_hash
       if id.present?
-        { id: id, email: email, fields: fields.values.map(&:to_hash) }
+        { :id => id, :email => email, :fields => fields.values.map(&:to_hash) }
       else
-        { email: email, fields: fields.values.map(&:to_hash) }
+        { :email => email, :fields => fields.values.map(&:to_hash) }
       end
     end
 
@@ -97,7 +97,7 @@ module Bronto
       end
 
       def to_hash
-        { field_id: field_id, content: content }
+        { :field_id => field_id, :content => content }
       end
     end
   end

@@ -8,7 +8,7 @@ module Bronto
     end
 
     def to_hash
-      hash = { id: id, name: name, status: status, message_folder_id: message_folder_id, content: content.values.map(&:to_hash) }
+      hash = { :id => id, :name => name, :status => status, :message_folder_id => message_folder_id, :content => content.values.map(&:to_hash) }
       [ :status, :id, :message_folder_id ].each do |f|
         hash.delete(f) if send(f).blank?
       end
@@ -29,7 +29,7 @@ module Bronto
       end
 
       def to_hash
-        { type: type, subject: subject, content: content }
+        { :type => type, :subject => subject, :content => content }
       end
     end
   end
